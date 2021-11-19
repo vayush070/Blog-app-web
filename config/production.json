@@ -1,0 +1,4 @@
+{
+  "mongo_url": "mongodb+srv://macks2:macks2@cluster0.wiohw.mongodb.net/Assignment1?retryWrites=true&w=majority",
+  "jwtSecret": "mysecretis"
+}
