@@ -1,5 +1,6 @@
 const express = require("express");
 const DB = require("./config/db");
+const path = require("path");
 const app = express();
 // const bodyParser = require("body-parser");
 
@@ -22,9 +23,9 @@ app.use((req, res, next) => {
   }
   next();
 });
-app.get("/", (req, res) => {
-  res.send("API RUNNING .");
-});
+// app.get("/", (req, res) => {
+//   res.send("API RUNNING .");
+// });
 
 app.use("/api/admin", require("./routes/api/Admin"));
 app.use("/api/aauth", require("./routes/api/AAuth"));
