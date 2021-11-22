@@ -5,6 +5,7 @@ import LoginAdmin from "./components/admin/LoginAdmin";
 import LoginUser from "./components/user/LoginUser";
 import Admin from "./components/admin/Admin";
 import User from "./components/user/User";
+import Alert from "./components/Alert/Alert";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -12,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <Alert />
       {isAuth ? (
         whichPage === 1 ? (
           <User />

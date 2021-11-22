@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,16 +7,20 @@ import {
   userActions,
   blogActions,
 } from "../../store";
+import "./User.css";
 
 const User = () => {
+  const [refresh, setrefresh] = useState(1);
   const u_id = useSelector((state) => state.form.curr_id);
   useEffect(() => {
-    const getblogs = async () => {
-      const res = await axios.get("/api/pblog/" + u_id);
-      dispatch(blogActions.updateBlogs(res.data));
-    };
-    getblogs();
-  }, []);
+    if (refresh) {
+      const getblogs = async () => {
+        const res = await axios.get("/api/pblog/" + u_id);
+        dispatch(blogActions.updateBlogs(res.data));
+      };
+      getblogs();
+    }
+  }, [refresh]);
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs.blogs);
   const text = useSelector((state) => state.form.text);
@@ -36,23 +40,50 @@ const User = () => {
         },
       };
       const res = await axios.post("/api/pblog", formData, config);
-      console.log(res);
+      // console.log(res);
       dispatch(blogActions.addblog(formData));
     } catch (error) {
       console.error(error.message);
     }
   };
+  const Refresh = () => {
+    setrefresh(refresh + 1);
+  };
+  const deleteBlogHandler = async (id) => {
+    try {
+      const res = await axios.delete("/api/pblog/" + id);
+      setrefresh(refresh + 1);
+      // console.log(res);
+    } catch (error) {}
+  };
+  let username = blogs[0].name;
   return (
     <div>
-      <h1>Your Blogs</h1>
-      {blogs.map((blog) => (
-        <div>
-          <p>{blog.text}</p>
-        </div>
-      ))}
-      <div>
+      <div className="blog-cont">
+        <div className="panel">User panel</div>
+        <button onClick={() => Refresh()}>Refresh</button>
+        <h1>Welcome {username}</h1>
+        {blogs.map((blog) => {
+          if (blog.verified) {
+            return (
+              <p>
+                <p>
+                  <p>
+                    <b>Post: </b>
+                  </p>
+                  <p>{blog.text}</p>
+                  <button onClick={() => deleteBlogHandler(blog._id)}>
+                    delete
+                  </button>
+                </p>
+              </p>
+            );
+          }
+        })}
+      </div>
+      <div class="form1">
         <h1>Add Blog</h1>
-        <form onSubmit={(e) => onSubmit(e)}>
+        <form onSubmit={(e) => onSubmit(e)} class="form-cont">
           <div class="form-group">
             <label for="exampleInputName1">Text</label>
             <input

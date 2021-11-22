@@ -26,7 +26,7 @@ const Header = () => {
   };
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light nav">
         <a class="navbar-brand" href="#">
           <h1>Blogger</h1>
         </a>
@@ -47,7 +47,7 @@ const Header = () => {
               <li class="nav-item">
                 <h3>
                   <a class="nav-link" href="#" onClick={togglePageHandler}>
-                    User
+                    Login to User
                   </a>
                 </h3>
               </li>
@@ -55,7 +55,7 @@ const Header = () => {
               <li class="nav-item">
                 <h3>
                   <a class="nav-link" href="#" onClick={togglePageHandler}>
-                    Admin
+                    Login to Admin
                   </a>
                 </h3>
               </li>

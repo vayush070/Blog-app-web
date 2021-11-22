@@ -16,6 +16,10 @@ const BlogSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = Blog = mongoose.model("blog", BlogSchema);

@@ -10,19 +10,19 @@ app.use(express.json({ extended: false }));
 // app.use(bodyParser.json({ extended: true }));
 // app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // to enable calls from every domain
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-  ); // allowed actiosn
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*"); // to enable calls from every domain
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+//   ); // allowed actiosn
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200); // to deal with chrome sending an extra options request
-  }
-  next();
-});
+//   if (req.method === "OPTIONS") {
+//     return res.sendStatus(200); // to deal with chrome sending an extra options request
+//   }
+//   next();
+// });
 // app.get("/", (req, res) => {
 //   res.send("API RUNNING .");
 // });

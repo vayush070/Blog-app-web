@@ -1,8 +1,12 @@
 .App {
   text-align: center;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 body {
-  background-color: rgb(229, 255, 251);
+  background-color: rgb(75, 85, 83);
+  overflow-y: scroll;
 }
 form {
   padding: 50px;
@@ -22,10 +26,24 @@ form {
 .App-link {
   color: #61dafb;
 }
-
+/* 
 p {
   border: 2px solid black;
   display: inline-block;
-  padding: 20px;
+  padding: 10px;
   border-radius: 7px;
+} */
+
+.nav {
+  background-color: rgb(137, 143, 117);
+}
+
+button {
+  background-color: silver;
+  border-radius: 10px;
+  border: 1px solid grey;
+  margin: 4px;
+}
+.alert {
+  background-color: burlywood;
 }

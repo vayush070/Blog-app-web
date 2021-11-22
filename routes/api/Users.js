@@ -17,6 +17,21 @@ router.get("/", async (req, res) => {
     res.send(users);
   } catch (error) {}
 });
+router.delete("/:id", async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id);
+    await user.remove();
+    res.send(user);
+  } catch (error) {}
+});
+router.delete("/soft/:id", async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id);
+    user.status = !user.status;
+    await user.save();
+    res.send(user);
+  } catch (error) {}
+});
 router.post(
   "/",
   [
@@ -33,7 +48,7 @@ router.post(
 
     try {
       let user = await User.findOne({ email });
-      if (!user) {
+      if (!user || !user.status) {
         // console.log("found error")
         return res
           .status(400)
@@ -53,7 +68,7 @@ router.post(
           id: user.id,
         },
       };
-      console.log(user.id);
+      // console.log(user.id);
       jwt.sign(
         payload,
         config.get("jwtSecret"),

@@ -56,6 +56,16 @@ const formSlice = createSlice({
     },
   },
 });
+const initialAlertState = { alert: "" };
+const alertSlice = createSlice({
+  name: "alert",
+  initialState: initialAlertState,
+  reducers: {
+    updateAlert(state, actions) {
+      state.alert = actions.payload;
+    },
+  },
+});
 
 const initialStateUsers = { users: [] };
 

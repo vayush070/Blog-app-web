@@ -48,18 +48,39 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//get all post
+router.get("/", async (req, res) => {
+  try {
+    const blogs = await Blog.find();
+    res.json(blogs);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("server error");
+  }
+});
+
 //delete a post by its id
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
-
-    if (blog.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: "user not Authorized" });
-    }
 
     await blog.remove();
 
     res.json({ msg: "Blog removed" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("server error");
+  }
+});
+
+//make a blog verified
+router.post("/:id", async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    blog.verified = !blog.verified;
+    await blog.save();
+
+    res.status(200).json({ msg: "Verified" });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("server error");

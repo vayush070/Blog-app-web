@@ -25,12 +25,13 @@ const LoginAdmin = () => {
           "Content-Type": "application/json",
         },
       };
-      console.log(formData);
+      // console.log(formData);
       const res = await axios.post("/api/admin", formData, config);
       if (res.status === 200) {
         dispatch(authActions.login());
         if (res.token) {
           axios.defaults.headers.common["x-auth-token"] = res.data.token;
+          localStorage.setItem("jwtToken", res.data.token);
         } else {
           delete axios.defaults.headers.common["x-auth-token"];
         }
