@@ -59,7 +59,7 @@ const LoginAdmin = () => {
   };
   // dispatch(formActions.setemail("vayush0"));
   return (
-    <div>
+    <div class="form1">
       <h1>Admin logIn</h1>
       <form onSubmit={(e) => onSubmit(e)}>
         <div class="form-group">

@@ -74,6 +74,7 @@ const User = () => {
       <div className="blog-cont">
         <div className="panel">User panel</div>
         <button onClick={() => Refresh()}>Refresh</button>
+        <div className="white-text">Scroll down to add blogs</div>
         <h1>Welcome user</h1>
         {blogs.map((blog) => {
           if (blog.verified) {

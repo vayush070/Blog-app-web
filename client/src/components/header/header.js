@@ -27,7 +27,7 @@ const Header = () => {
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light nav">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand navbar-and" href="#">
           <h1>Blogger</h1>
         </a>
         <button

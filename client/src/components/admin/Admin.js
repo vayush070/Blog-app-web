@@ -122,6 +122,7 @@ const Admin = () => {
     <div>
       <div className="panel">Admin panel</div>
       <button onClick={() => Refresh()}>Refresh</button>
+      <div className="white-text">Scroll down to add user</div>
       <div className="container-a">
         <div class="user-cont">
           <h1 className="my-4">All users</h1>

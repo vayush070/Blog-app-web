@@ -59,7 +59,7 @@ const LoginUser = () => {
     }
   };
   return (
-    <div>
+    <div class="form1">
       <h1>User logIn</h1>
       <form onSubmit={(e) => onSubmit(e)}>
         <div class="form-group">

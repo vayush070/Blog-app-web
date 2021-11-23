@@ -59,3 +59,12 @@ button {
     transform: translateY(0);
   }
 }
+
+.navbar-and h1 {
+  color: aliceblue;
+  text-shadow: 0 0 3px #e47171, 0 0 5px #000066;
+}
+
+.white-text {
+  color: rgb(190, 190, 190);
+}
