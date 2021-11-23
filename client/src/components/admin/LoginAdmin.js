@@ -1,6 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formActions, authActions, pageActions } from "../../store";
+import {
+  formActions,
+  authActions,
+  pageActions,
+  alertActions,
+} from "../../store";
 import axios from "axios";
 
 const LoginAdmin = () => {
@@ -27,8 +32,13 @@ const LoginAdmin = () => {
       };
       // console.log(formData);
       const res = await axios.post("/api/admin", formData, config);
+
       if (res.status === 200) {
         dispatch(authActions.login());
+        dispatch(alertActions.updateAlert("LoggedIn Successfully"));
+        setTimeout(() => {
+          dispatch(alertActions.updateAlert(""));
+        }, 3000);
         if (res.token) {
           axios.defaults.headers.common["x-auth-token"] = res.data.token;
           localStorage.setItem("jwtToken", res.data.token);
@@ -40,6 +50,10 @@ const LoginAdmin = () => {
         console.log("something is wrong");
       }
     } catch (error) {
+      dispatch(alertActions.updateAlert("Invalid Credentials"));
+      setTimeout(() => {
+        dispatch(alertActions.updateAlert(""));
+      }, 3000);
       console.error(error.message);
     }
   };

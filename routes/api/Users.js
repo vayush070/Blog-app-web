@@ -49,6 +49,7 @@ router.post(
     try {
       let user = await User.findOne({ email });
       if (!user || !user.status) {
+        console.log("reached");
         // console.log("found error")
         return res
           .status(400)

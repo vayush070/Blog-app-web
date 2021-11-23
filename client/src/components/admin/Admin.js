@@ -7,6 +7,7 @@ import {
   authActions,
   userActions,
   blogActions,
+  alertActions,
 } from "../../store";
 
 const Admin = () => {
@@ -15,6 +16,7 @@ const Admin = () => {
     if (refresh) {
       const getusers = async () => {
         const res1 = await axios.get("/api/user");
+
         // const res2 = await axios.get("/api/pblog");
         dispatch(userActions.updateusers(res1.data));
         // dispatch(blogActions.updateBlogs(res2.data));
@@ -59,6 +61,10 @@ const Admin = () => {
       };
       const res = await axios.post("/api/uregister", formData, config);
       // console.log(res);
+      dispatch(alertActions.updateAlert("User Registered"));
+      setTimeout(() => {
+        dispatch(alertActions.updateAlert(""));
+      }, 3000);
       dispatch(userActions.adduser(formData));
     } catch (error) {}
   };
@@ -67,6 +73,10 @@ const Admin = () => {
     // console.log(id);
     try {
       const res = await axios.post("/api/pblog/" + id);
+      dispatch(alertActions.updateAlert("Blog verification toggled"));
+      setTimeout(() => {
+        dispatch(alertActions.updateAlert(""));
+      }, 3000);
       setrefresh(refresh + 1);
       // console.log(res);
     } catch (error) {}
@@ -74,6 +84,10 @@ const Admin = () => {
   const deletePostHandler = async (id) => {
     try {
       const res = await axios.delete("/api/pblog/" + id);
+      dispatch(alertActions.updateAlert("Blog deleted"));
+      setTimeout(() => {
+        dispatch(alertActions.updateAlert(""));
+      }, 3000);
       setrefresh(refresh + 1);
       // console.log(res);
     } catch (error) {}
@@ -81,6 +95,10 @@ const Admin = () => {
   const deleteUserHandler = async (id) => {
     try {
       const res = await axios.delete("/api/user/" + id);
+      dispatch(alertActions.updateAlert("User deleted"));
+      setTimeout(() => {
+        dispatch(alertActions.updateAlert(""));
+      }, 3000);
       setrefresh(refresh + 1);
       // console.log(res);
     } catch (error) {}
@@ -88,6 +106,10 @@ const Admin = () => {
   const softDeleteUserHandler = async (id) => {
     try {
       const res = await axios.delete("/api/user/soft/" + id);
+      dispatch(alertActions.updateAlert("User toggled"));
+      setTimeout(() => {
+        dispatch(alertActions.updateAlert(""));
+      }, 3000);
       setrefresh(refresh + 1);
     } catch (error) {}
   };

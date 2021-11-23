@@ -6,6 +6,7 @@ import {
   authActions,
   userActions,
   blogActions,
+  alertActions,
 } from "../../store";
 import "./User.css";
 
@@ -31,6 +32,7 @@ const User = () => {
     text,
   };
   const onSubmit = async (e) => {
+    // dispatch(alertActions.updateAlert("Blog"));
     e.preventDefault();
 
     try {
@@ -40,6 +42,12 @@ const User = () => {
         },
       };
       const res = await axios.post("/api/pblog", formData, config);
+      dispatch(
+        alertActions.updateAlert("Send to admin, waiting for verification")
+      );
+      setTimeout(() => {
+        dispatch(alertActions.updateAlert(""));
+      }, 3000);
       // console.log(res);
       dispatch(blogActions.addblog(formData));
     } catch (error) {
@@ -52,17 +60,21 @@ const User = () => {
   const deleteBlogHandler = async (id) => {
     try {
       const res = await axios.delete("/api/pblog/" + id);
+      dispatch(alertActions.updateAlert("Blog deleted"));
+      setTimeout(() => {
+        dispatch(alertActions.updateAlert(""));
+      }, 3000);
       setrefresh(refresh + 1);
       // console.log(res);
     } catch (error) {}
   };
-  let username = blogs[0].name;
+  // let username = blogs[0].name;
   return (
     <div>
       <div className="blog-cont">
         <div className="panel">User panel</div>
         <button onClick={() => Refresh()}>Refresh</button>
-        <h1>Welcome {username}</h1>
+        <h1>Welcome user</h1>
         {blogs.map((blog) => {
           if (blog.verified) {
             return (

@@ -103,6 +103,7 @@ const store = configureStore({
     form: formSlice.reducer,
     users: usersSlice.reducer,
     blogs: blogsSlice.reducer,
+    alert: alertSlice.reducer,
   },
 });
 
@@ -111,5 +112,6 @@ export const authActions = authSlice.actions;
 export const formActions = formSlice.actions;
 export const userActions = usersSlice.actions;
 export const blogActions = blogsSlice.actions;
+export const alertActions = alertSlice.actions;
 
 export default store;

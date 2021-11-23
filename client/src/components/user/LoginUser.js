@@ -1,7 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { formActions, authActions, pageActions } from "../../store";
+import {
+  formActions,
+  authActions,
+  pageActions,
+  alertActions,
+} from "../../store";
 
 const LoginUser = () => {
   const dispatch = useDispatch();
@@ -30,6 +35,10 @@ const LoginUser = () => {
       dispatch(formActions.setid(res.data.iid));
       if (res.status === 200) {
         dispatch(authActions.login());
+        dispatch(alertActions.updateAlert("LoggedIn Successfully"));
+        setTimeout(() => {
+          dispatch(alertActions.updateAlert(""));
+        }, 3000);
         if (res.data.token) {
           // console.log("khad");
           axios.defaults.headers.common["x-auth-token"] = res.data.token;
@@ -42,6 +51,10 @@ const LoginUser = () => {
         console.log("something is wrong");
       }
     } catch (error) {
+      dispatch(alertActions.updateAlert("Invalid Credentials"));
+      setTimeout(() => {
+        dispatch(alertActions.updateAlert(""));
+      }, 3000);
       console.error(error.message);
     }
   };
